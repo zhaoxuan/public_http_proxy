@@ -32,10 +32,10 @@ class XiciSpider(scrapy.spiders.Spider):
     """
     name = 'xici_spider'
     allowed_domains = ['xicidaili.com']
-    start_urls = ['http://www.xicidaili.com/wt/1']
+    start_urls = ['http://www.xicidaili.com/wt/1', 'http://www.xicidaili.com/wt/2', 'http://www.xicidaili.com/wt/3']
 
     # 减慢爬取速度
-    download_delay = 1
+    download_delay = 30
 
     def __init__(self, success, failure):
         self.success = success
@@ -69,18 +69,23 @@ class XiciSpider(scrapy.spiders.Spider):
             if index == 0:
                 continue
 
-            ip_item = ProxySpiderItem()
-            ip_item['country'] = 'cn'
-            ip_item['ip'] = self.get_or_none(line.xpath('td[2]/text()').extract())
-            ip_item['port'] = self.get_or_none(line.xpath('td[3]/text()').extract())
+            try:
+                ip_item = ProxySpiderItem()
+                ip_item['country'] = 'cn'
+                ip_item['ip'] = self.get_or_none(line.xpath('td[2]/text()').extract())
+                ip_item['port'] = self.get_or_none(line.xpath('td[3]/text()').extract())
 
-            if self.get_or_none(line.xpath('td[4]/a/text()').extract()) is None:
-                ip_item['address'] = ''
-            else:
-                ip_item['address'] = re.sub(r'[\n|\s]', '', self.get_or_none(line.xpath('td[4]/a/text()').extract()))
+                if self.get_or_none(line.xpath('td[4]/a/text()').extract()) is None:
+                    ip_item['address'] = ''
+                else:
+                    ip_item['address'] = re.sub(r'[\n|\s]', '', self.get_or_none(line.xpath('td[4]/a/text()').extract()))
 
-            ip_item['anonymous'] = self.get_or_none(line.xpath('td[5]/text()').extract())
-            ip_item['proxy_type'] = self.get_or_none(line.xpath('td[6]/text()').extract())
-            ip_item['auth_datetime'] = self.get_or_none(line.xpath('td[10]/text()').extract())
+                ip_item['anonymous'] = self.get_or_none(line.xpath('td[5]/text()').extract())
+                ip_item['proxy_type'] = self.get_or_none(line.xpath('td[6]/text()').extract())
+                ip_item['auth_datetime'] = self.get_or_none(line.xpath('td[10]/text()').extract())
 
-            yield ip_item
+                self.success += 1
+                yield ip_item
+            except Exception as e:
+                self.failure += 1
+                self.logger.error(str(e))
