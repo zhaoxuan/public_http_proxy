@@ -20,7 +20,7 @@
 
 from peewee import *
 
-DATABASE = MySQLDatabase('public_http_proxy', **{'host': 'beijing.iok.la', 'password': '123456', 'port': 23306, 'user': 'john'})
+DATABASE = MySQLDatabase('public_http_proxy', **{'host': '192.168.7.111', 'password': '123456', 'port': 3306, 'user': 'john'})
 DATABASE.connect()
 
 
