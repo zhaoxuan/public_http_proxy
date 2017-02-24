@@ -53,7 +53,7 @@ def ping_ip(ip, timeout=2, count=4):
 def test_http_proxy_ip(number=10):
     for r in PublicHttpProxyIp.select().order_by(PublicHttpProxyIp.update_datetime).limit(number):
         now = datetime.datetime.now()
-        print 'Ping host: %s ' % r.ip
+
         is_alive, delay = ping_ip(r.ip)
         r.is_alive = is_alive
 
@@ -63,6 +63,8 @@ def test_http_proxy_ip(number=10):
             r.timeout = 0
         r.update_datetime = int(now.strftime('%y%m%d%H%M'))
         r.save()
+
+        print 'Ping host: %s in %0.4fms ' % (r.ip, r.timeout)
 
 
 while True:
