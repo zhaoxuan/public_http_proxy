@@ -32,7 +32,17 @@ class XiciSpider(scrapy.spiders.Spider):
     """
     name = 'xici_spider'
     allowed_domains = ['xicidaili.com']
-    start_urls = ['http://www.xicidaili.com/wt/1', 'http://www.xicidaili.com/wt/2', 'http://www.xicidaili.com/wt/3']
+    start_urls = [
+        'http://www.xicidaili.com/wt/1',
+        'http://www.xicidaili.com/wt/2',
+        'http://www.xicidaili.com/wt/3',
+        'http://www.xicidaili.com/nn/1',
+        'http://www.xicidaili.com/nn/2',
+        'http://www.xicidaili.com/nn/3',
+        'http://www.xicidaili.com/nt/1',
+        'http://www.xicidaili.com/nt/2',
+        'http://www.xicidaili.com/nt/3',
+    ]
 
     # 减慢爬取速度
     download_delay = 30
@@ -70,6 +80,8 @@ class XiciSpider(scrapy.spiders.Spider):
                 continue
 
             try:
+                import pdb
+                pdb.set_trace()
                 ip_item = ProxySpiderItem()
                 ip_item['country'] = 'cn'
                 ip_item['ip'] = self.get_or_none(line.xpath('td[2]/text()').extract())
