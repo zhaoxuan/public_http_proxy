@@ -80,8 +80,6 @@ class XiciSpider(scrapy.spiders.Spider):
                 continue
 
             try:
-                import pdb
-                pdb.set_trace()
                 ip_item = ProxySpiderItem()
                 ip_item['country'] = 'cn'
                 ip_item['ip'] = self.get_or_none(line.xpath('td[2]/text()').extract())
