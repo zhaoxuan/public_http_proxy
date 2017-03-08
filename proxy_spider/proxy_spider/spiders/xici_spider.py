@@ -33,15 +33,27 @@ class XiciSpider(scrapy.spiders.Spider):
     name = 'xici_spider'
     allowed_domains = ['xicidaili.com']
     start_urls = [
-        'http://www.xicidaili.com/wt/1',
-        'http://www.xicidaili.com/wt/2',
-        'http://www.xicidaili.com/wt/3',
+        # 'http://www.xicidaili.com/wt/1',
+        # 'http://www.xicidaili.com/wt/2',
+        # 'http://www.xicidaili.com/wt/3',
         'http://www.xicidaili.com/nn/1',
         'http://www.xicidaili.com/nn/2',
         'http://www.xicidaili.com/nn/3',
+        'http://www.xicidaili.com/nn/4',
+        'http://www.xicidaili.com/nn/5',
+        'http://www.xicidaili.com/nn/6',
+        'http://www.xicidaili.com/nn/7',
+        'http://www.xicidaili.com/nn/8',
+        'http://www.xicidaili.com/nn/9',
         'http://www.xicidaili.com/nt/1',
         'http://www.xicidaili.com/nt/2',
         'http://www.xicidaili.com/nt/3',
+        'http://www.xicidaili.com/nt/4',
+        'http://www.xicidaili.com/nt/5',
+        'http://www.xicidaili.com/nt/6',
+        'http://www.xicidaili.com/nt/7',
+        'http://www.xicidaili.com/nt/8',
+        'http://www.xicidaili.com/nt/9',
     ]
 
     # 减慢爬取速度
